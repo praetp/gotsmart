@@ -1,0 +1,20 @@
+#create symlink to this file from /etc/systemd/system/gotsmart.service
+#run: sudo systemctl enable gotsmart.service
+#run: sudo adduser nobody dialout to fix permissions
+#reboot to test everything
+
+
+[Unit]
+Description=Gotsmart
+After=multi-user.target
+
+[Service]
+Type=idle
+WorkingDirectory=/opt/homestuff/gotsmart
+ExecStart=/opt/homestuff/gotsmart/gotsmart --device /dev/ttyUSB0
+User=nobody
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
